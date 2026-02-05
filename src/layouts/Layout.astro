@@ -1,0 +1,16 @@
+---
+const { title = "Skup mieszkań Lublin" } = Astro.props;
+import "../styles/global.css";
+---
+<html lang="pl">
+<head>
+    <meta charset="UTF-8" />
+    <title>{title}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+</head>
+<body class="bg-slate-950 text-slate-50">
+<main class="min-h-screen">
+    <slot />
+</main>
+</body>
+</html>
