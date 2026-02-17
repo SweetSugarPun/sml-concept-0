@@ -1,50 +1,45 @@
-<section class="min-h-[70vh] flex items-center">
-    <div class="mx-auto max-w-5xl px-4 py-16 grid gap-10 md:grid-cols-2">
-        <div class="space-y-6">
-            <p class="text-sm font-semibold tracking-widest text-emerald-400 uppercase">
-                Skup mieszkań Lublin
+---
+import ImageCarousel from "./ImageCarousel.astro";
+---
+
+<section class="min-h-[80vh] flex items-center pt-0 pb-16">
+    <div class="mx-auto flex max-w-5xl flex-col items-center px-4 py-16 text-center gap-10">
+        <!-- Tekst + przyciski -->
+        <div class="max-w-3xl space-y-6 hero-fade-in-up">
+            <p class="section-label mx-auto text-xl">
+                SZYBKA, BEZPIECZNA SPRZEDAŻ
             </p>
-            <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight">
-                Gotówka za mieszkanie <span class="text-emerald-400">po spadku</span> lub z&nbsp;wadą
+
+            <h1 class="text-4xl font-semibold text-slate-50 sm:text-5xl">
+                Gotówka za mieszkanie <span class="text-[#d3a842] text-[1.1em]">po spadku</span> lub z wadą
             </h1>
-            <p class="text-slate-300">
+
+            <p class="mt-3 text-base text-slate-300 sm:text-lg">
                 Bez remontu, bez stresu, pomagamy w formalnościach. Wycena w 24 godziny, decyzja i akt
                 notarialny nawet w 7 dni.
             </p>
-            <div class="flex flex-col sm:flex-row gap-3">
-                <a href="tel:+48XXXXXXXXX"
-                   class="inline-flex items-center justify-center rounded-lg bg-emerald-500 px-6 py-3
-                  text-base font-semibold text-slate-950 hover:bg-emerald-400 transition">
-                    Zadzwoń teraz
+
+            <div class="mt-6 flex flex-wrap items-center justify-center gap-4">
+                <a href="#kontakt" class="btn-outline hero-cta">
+                    WYPEŁNIJ FORMULARZ
                 </a>
-                <a href="#kontakt"
-                   class="inline-flex items-center justify-center rounded-lg border border-slate-600 px-6 py-3
-                  text-base font-semibold hover:border-slate-400 transition">
-                    Wypełnij formularz
+
+                <a href="tel:+48600000000" class="btn-gold-main hero-cta">
+                    ZADZWOŃ TERAZ
                 </a>
             </div>
         </div>
-        <div class="rounded-2xl border border-slate-800 bg-slate-900/60 p-6 shadow-xl">
-            <p class="mb-4 text-sm font-semibold text-slate-300">
-                Krótkie zgłoszenie – oddzwonimy w 15 minut.
-            </p>
-            <form class="space-y-3">
-                <input class="w-full rounded-lg border border-slate-700 bg-slate-900 px-3 py-2 text-sm
-                      focus:border-emerald-500 focus:outline-none"
-                       placeholder="Imię" />
-                <input class="w-full rounded-lg border border-slate-700 bg-slate-900 px-3 py-2 text-sm
-                      focus:border-emerald-500 focus:outline-none"
-                       placeholder="Telefon" />
-                <textarea rows="3"
-                          class="w-full rounded-lg border border-slate-700 bg-slate-900 px-3 py-2 text-sm
-                         focus:border-emerald-500 focus:outline-none"
-                          placeholder="Opisz mieszkanie (spadek, zadłużenie, stan)"></textarea>
-                <button type="submit"
-                        class="w-full rounded-lg bg-emerald-500 px-4 py-2 text-sm font-semibold
-                       text-slate-950 hover:bg-emerald-400 transition">
-                    Wyślij zgłoszenie
-                </button>
-            </form>
+
+        <!-- Zdjęcie pod hero -->
+        <div class="mx-auto mt-10 max-w-5xl hero-fade-in-up-slow">
+            <div class="overflow-hidden rounded-3xl bg-slate-900/60 shadow-[0_22px_60px_rgba(0,0,0,0.85)]">
+                <img
+                        src="/images/lublin-2.jpg"
+                        alt="Lublin, wschód słońca"
+                        class="block h-full w-full object-cover"
+                        loading="lazy"
+                />
+            </div>
         </div>
     </div>
 </section>

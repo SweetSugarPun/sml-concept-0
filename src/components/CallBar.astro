@@ -1,0 +1,49 @@
+---
+import Icon from "heroicons-astro/Heroicon.astro";
+
+const phoneNumber = '+48 600 000 000';
+
+const company = {
+    name: 'Skup Mieszkań Lublin',
+    nip: 'NIP 000-000-00-00',
+    address: 'ul. Przykładowa 1, Lublin',
+};
+
+let isScrolled = false;
+
+if (Astro.client) {
+    window.addEventListener('scroll', () => {
+        isScrolled = window.scrollY > 10;
+    });
+}
+---
+<header class={`sticky top-0 z-40 border-b border-slate-800 bg-slate-900/90 backdrop-blur transition-shadow ${isScrolled ? 'shadow-md shadow-black/40' : ''}`}>
+    <div class="mx-auto flex max-w-6xl items-center justify-between px-4 py-1.5 text-slate-200 sm:px-6 lg:px-8">
+        <!-- Info o firmie po lewej -->
+        <div class="space-y-0.5 text-xs sm:text-sm leading-snug">
+            <p class="text-sm font-semibold sm:text-base">
+                {company.name}
+            </p>
+            <p class="font-medium text-slate-300">
+                {company.address}
+            </p>
+            <p class="font-medium text-slate-300">
+                {company.nip}
+            </p>
+        </div>
+        <!-- Przycisk telefoniczny -->
+        <a
+                href={`tel:${phoneNumber.replace(/\s+/g, '')}`}
+                class="btn-callbar"
+        >
+            <Icon
+                    iconCode="phone"
+                    iconStyle="outline"
+                    customClasses="mr-3 h-5 w-5"
+            />
+            <span class="text-sm leading-none">
+        {phoneNumber}
+      </span>
+        </a>
+    </div>
+</header>

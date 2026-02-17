@@ -1,0 +1,52 @@
+---
+interface Props {
+    image: string;          // np. "/images/lublin-2.jpg"
+    height?: string;        // np. "h-72", "h-96", domyślnie h-80
+    overlayColor?: string;  // tailwindowa klasa tła overlay'u
+    class?: string;         // dodatkowe klasy kontenera
+}
+
+const {
+    image,
+    height = "h-80",
+    overlayColor = "bg-slate-900/55",
+    class: extraClass = "",
+} = Astro.props;
+---
+
+<section
+        class={`relative isolate overflow-hidden ${height} ${extraClass}`}
+>
+    <!-- Tło z efektem parallax -->
+    <div
+            class="absolute inset-0 -z-10 bg-cover bg-center bg-fixed md:bg-fixed bg-no-repeat"
+            style={`background-image: url('${image}');`}
+    ></div>
+
+    <!-- Overlay kolorystyczny -->
+    <div class={`absolute inset-0 -z-10 ${overlayColor}`}></div>
+
+    <!-- Delikatna animowana poświata -->
+    <div class="pointer-events-none absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-white/10 via-transparent to-transparent opacity-40 animate-[parallaxGlow_6s_ease-in-out_infinite]"></div>
+
+    <!-- Treść sekcji (opcjonalna) -->
+    <div class="mx-auto flex h-full max-w-5xl items-center justify-center px-4 text-center text-slate-50">
+        <div class="hero-fade-in-up-slow">
+            <slot />
+        </div>
+    </div>
+</section>
+
+<style>
+    @keyframes parallaxGlow {
+        0%, 100% { opacity: 0.25; transform: translateY(0); }
+        50%      { opacity: 0.6;  transform: translateY(6px); }
+    }
+
+    @media (max-width: 768px) {
+        /* na mobile fixed bywa problematyczne – przełączamy na scroll */
+        section > div[style] {
+            background-attachment: scroll;
+        }
+    }
+</style>

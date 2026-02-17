@@ -1,0 +1,87 @@
+@import "tailwindcss";
+
+html {
+    scroll-behavior: smooth;
+}
+
+.scrollbar-none::-webkit-scrollbar {
+    display: none;
+}
+.scrollbar-none {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+/* Twoje komponenty Tailwinda */
+@layer components {
+    /* Przyciski */
+
+    .hero-cta {
+        @apply min-w-70 justify-center;
+    }
+
+    .btn-callbar {
+        @apply inline-flex items-center justify-center rounded-lg px-5 py-2.5 text-xs font-semibold tracking-[0.12em] transition
+        border border-slate-200 bg-white text-slate-900
+        hover:bg-[#d3a842] hover:border-[#d3a842] hover:text-white;
+        max-width: 203px;
+    }
+
+    .btn-gold-main {
+        @apply inline-flex items-center justify-center rounded-xl px-8 py-3 text-sm font-semibold tracking-[0.18em] transition
+        border border-[#d3a842] bg-[#d3a842] text-slate-900 shadow-sm
+        hover:bg-white hover:text-slate-900 hover:border-transparent;
+    }
+
+    .btn-outline {
+        @apply inline-flex items-center justify-center rounded-xl px-8 py-3 text-sm font-semibold tracking-[0.18em] transition
+        border border-slate-500 bg-transparent text-slate-100
+        hover:border-[#d3a842] hover:text-[#d3a842];
+    }
+
+    /* Label nad nagłówkiem */
+    .section-label {
+        @apply mb-3 text-[10px] sm:text-xs font-semibold uppercase tracking-[0.4em] text-[#d3a842];
+    }
+
+    /* Karty */
+    .card-light {
+        @apply rounded-2xl border border-slate-200 bg-white p-5 shadow-sm;
+    }
+
+    .card-dark {
+        @apply rounded-3xl border border-slate-800 bg-slate-900/70 p-6 shadow-xl;
+    }
+
+    /* Pola formularza na ciemnym tle */
+    .input-dark {
+        @apply w-full rounded-xl border border-slate-700 bg-slate-900 px-3 py-2 text-sm text-slate-50
+        focus:border-[#d3a842] focus:outline-none focus:ring-1 focus:ring-[#d3a842];
+    }
+
+    @layer utilities {
+        .hero-fade-in-up {
+            @apply opacity-0 translate-y-6;
+            animation: hero-fade-in-up 600ms ease-out forwards;
+            animation-delay: 120ms;
+        }
+
+        .hero-fade-in-up-slow {
+            @apply opacity-0 translate-y-8;
+            animation: hero-fade-in-up 800ms ease-out forwards;
+            animation-delay: 220ms;
+        }
+    }
+
+    @keyframes hero-fade-in-up {
+        from {
+            opacity: 0;
+            transform: translateY(1.5rem);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+}
+
