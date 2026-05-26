@@ -1,3 +1,6 @@
+---
+import {contact} from '../data/contact';
+---
 <section id="kontakt" class="border-t border-slate-800 bg-slate-950">
     <div class="mx-auto max-w-6xl px-4 py-16">
         <div class="grid gap-10 md:grid-cols-[3fr,2fr]">
@@ -16,11 +19,11 @@
                 </p>
 
                 <div class="space-y-2 text-sm text-slate-300">
-                    <p><span class="font-semibold text-slate-50">Telefon:</span> +48 XXX XXX XXX</p>
-                    <p><span class="font-semibold text-slate-50">E-mail:</span> kontakt@twojadomena.pl</p>
-                    <p><span class="font-semibold text-slate-50">Lokalizacja:</span> Lublin i okolice</p>
+                    <p><span class="font-semibold text-slate-50">Telefon: </span><a href={contact.phoneHref} class="hover:text-[#d3a842] active:text-[#d3a842] focus-visible:text-[#d3a842]">{contact.phone}</a></p>
+                    <p><span class="font-semibold text-slate-50">E-mail: </span><a href={contact.emailHref} class="hover:text-[#d3a842] active:text-[#d3a842] focus-visible:text-[#d3a842]">{contact.email}</a></p>
+                    <p><span class="font-semibold text-slate-50">Lokalizacja: </span>{contact.location}</p>
                     <p class="pt-2 text-xs text-slate-500">
-                        Tu wstaw dane firmy Bartka: nazwa, NIP, ewentualnie adres – to buduje zaufanie.
+                        {contact.company}
                     </p>
                 </div>
             </div>

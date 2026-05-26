@@ -1,5 +1,5 @@
 ---
-import ImageCarousel from "./ImageCarousel.astro";
+import {contact} from "../data/contact.ts";
 ---
 
 <section class="min-h-[80vh] flex items-center pt-0 pb-16">
@@ -24,7 +24,7 @@ import ImageCarousel from "./ImageCarousel.astro";
                     WYPEŁNIJ FORMULARZ
                 </a>
 
-                <a href="tel:+48600000000" class="btn-gold-main hero-cta">
+                <a href={contact.phoneHref} class="btn-gold-main hero-cta">
                     ZADZWOŃ TERAZ
                 </a>
             </div>
@@ -34,8 +34,8 @@ import ImageCarousel from "./ImageCarousel.astro";
         <div class="mx-auto mt-10 max-w-5xl hero-fade-in-up-slow">
             <div class="overflow-hidden rounded-3xl bg-slate-900/60 shadow-[0_22px_60px_rgba(0,0,0,0.85)]">
                 <img
-                        src="/images/lublin-2.jpg"
-                        alt="Lublin, wschód słońca"
+                        src="/images/stock-lublin-2.jpeg"
+                        alt="Lublin, panorama"
                         class="block h-full w-full object-cover"
                         loading="lazy"
                 />

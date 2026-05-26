@@ -1,14 +1,14 @@
 ---
 interface Props {
     image: string;          // np. "/images/lublin-2.jpg"
-    height?: string;        // np. "h-72", "h-96", domyślnie h-80
+    height?: string;        // np. "h-72", "h-96", domyślnie h-120
     overlayColor?: string;  // tailwindowa klasa tła overlay'u
     class?: string;         // dodatkowe klasy kontenera
 }
 
 const {
     image,
-    height = "h-80",
+    height = "h-120",
     overlayColor = "bg-slate-900/55",
     class: extraClass = "",
 } = Astro.props;
@@ -27,7 +27,7 @@ const {
     <div class={`absolute inset-0 -z-10 ${overlayColor}`}></div>
 
     <!-- Delikatna animowana poświata -->
-    <div class="pointer-events-none absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-white/10 via-transparent to-transparent opacity-40 animate-[parallaxGlow_6s_ease-in-out_infinite]"></div>
+    <div class="pointer-events-none absolute inset-x-0 top-0 h-24 bg-linear-to-b from-white/10 via-transparent to-transparent opacity-40 animate-[parallaxGlow_6s_ease-in-out_infinite]"></div>
 
     <!-- Treść sekcji (opcjonalna) -->
     <div class="mx-auto flex h-full max-w-5xl items-center justify-center px-4 text-center text-slate-50">
