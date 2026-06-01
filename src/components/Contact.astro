@@ -19,8 +19,9 @@ import {contact} from '../data/contact';
                 </p>
 
                 <div class="space-y-2 text-sm text-slate-300">
-                    <p><span class="font-semibold text-slate-50">Telefon: </span><a href={contact.phoneHref} class="hover:text-[#d3a842] active:text-[#d3a842] focus-visible:text-[#d3a842]">{contact.phone}</a></p>
-                    <p><span class="font-semibold text-slate-50">E-mail: </span><a href={contact.emailHref} class="hover:text-[#d3a842] active:text-[#d3a842] focus-visible:text-[#d3a842]">{contact.email}</a></p>
+                    <p><span class="font-semibold text-slate-50">Telefon: </span>
+                        <a href={contact.phoneHref} class="hover:text-[#d3a842] active:text-[#d3a842] focus-visible:text-[#d3a842]">{contact.phone}</a>
+                    </p>
                     <p><span class="font-semibold text-slate-50">Lokalizacja: </span>{contact.location}</p>
                     <p class="pt-2 text-xs text-slate-500">
                         {contact.company}
@@ -33,18 +34,30 @@ import {contact} from '../data/contact';
                 <h3 class="mb-4 text-lg font-semibold text-slate-50">
                     Formularz kontaktowy
                 </h3>
-                <form class="space-y-3">
+                <div id="form-success" class="mb-4 hidden rounded-2xl border border-emerald-500/30 bg-emerald-500/10 p-4 text-sm text-emerald-200">
+                    Dziękujemy — wiadomość została wysłana. Odpowiemy najszybciej, jak to możliwe.
+                </div>
+                <div id="form-error" class="mb-4 hidden rounded-2xl border border-rose-500/30 bg-rose-500/10 p-4 text-sm text-rose-200">
+                    Nie udało się wysłać wiadomości. Spróbuj ponownie później lub zadzwoń do nas bezpośrednio.
+                </div>
+                <form id="contact-form" action="/send.php" method="POST" class="space-y-3">
                     <div class="grid gap-3 md:grid-cols-2">
                         <input
                                 class="input-dark"
                                 placeholder="Imię"
                                 name="name"
+                                autocomplete="name"
+                                maxlength="80"
+                                required
                         />
                         <input
                                 class="input-dark"
                                 placeholder="Telefon"
                                 name="phone"
                                 type="tel"
+                                autocomplete="tel"
+                                maxlength="30"
+                                required
                         />
                     </div>
 
@@ -52,13 +65,18 @@ import {contact} from '../data/contact';
                             class="input-dark"
                             placeholder="E-mail (opcjonalnie)"
                             name="email"
+                            autocomplete="email"
                             type="email"
+                            maxlength="254"
                     />
 
                     <input
                             class="input-dark"
                             placeholder="Lokalizacja mieszkania (dzielnica, ulica)"
                             name="location"
+                            autocomplete="street-address"
+                            maxlength="120"
+                            required
                     />
 
                     <textarea
@@ -66,7 +84,22 @@ import {contact} from '../data/contact';
                             class="input-dark"
                             placeholder="Opisz krótko mieszkanie i sytuację (spadek, zadłużenie, stan techniczny)..."
                             name="details"
+                            maxlength="2500"
+                            required
                     ></textarea>
+
+                    <div aria-hidden="true" class="absolute left-[-9999px] top-auto h-px w-px overflow-hidden opacity-0 pointer-events-none">
+                        <label for="website">Strona internetowa</label>
+                        <input
+                                type="text"
+                                name="website"
+                                id="website"
+                                tabindex="-1"
+                                autocomplete="off"
+                        />
+                    </div>
+
+                    <input type="hidden" name="form_started_at" id="form-started-at" />
 
                     <button
                             type="submit"
@@ -83,13 +116,63 @@ import {contact} from '../data/contact';
             </div>
         </div>
     </div>
-
-    <div class="border-t border-slate-800 bg-slate-900">
-        <div
-                class="mx-auto flex max-w-6xl flex-col gap-2 px-4 py-4 text-[11px] text-slate-300 md:flex-row md:items-center md:justify-between"
-        >
-            <span>© {new Date().getFullYear()} Skup mieszkań Lublin – wszystkie prawa zastrzeżone.</span>
-            <span>Prosta, szybka i bezpieczna sprzedaż mieszkania w Lublinie.</span>
-        </div>
-    </div>
 </section>
+
+<script>
+    const startedAtInput = document.querySelector<HTMLInputElement>('#form-started-at');
+    const successBox = document.querySelector<HTMLElement>('#form-success');
+    const errorBox = document.querySelector<HTMLElement>('#form-error');
+    const contactSection = document.querySelector<HTMLElement>('#kontakt');
+    const form = document.querySelector<HTMLFormElement>('#contact-form');
+
+    const defaultErrorMessage =
+        'Nie udało się wysłać wiadomości. Spróbuj ponownie później lub zadzwoń do nas bezpośrednio.';
+
+    const errorMessages: Record<string, string> = {
+        '1': defaultErrorMessage,
+        'name_too_long': 'Pole imię jest za długie.',
+        'phone_too_long': 'Pole telefon jest za długie.',
+        'email_too_long': 'Pole e-mail jest za długie.',
+        'location_too_long': 'Pole lokalizacja jest za długie.',
+        'details_too_long': 'Opis jest za długi.'
+    };
+
+    if (startedAtInput) {
+        startedAtInput.value = String(Date.now());
+    }
+
+    const params = new URLSearchParams(window.location.search);
+    const sentParam = params.get('sent');
+    const errorParam = params.get('error');
+
+    if (sentParam === '1') {
+        successBox?.classList.remove('hidden');
+        errorBox?.classList.add('hidden');
+
+        requestAnimationFrame(() => {
+            contactSection?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+    }
+
+    if (errorParam && errorMessages[errorParam]) {
+        if (errorBox) {
+            errorBox.textContent = errorMessages[errorParam];
+            errorBox.classList.remove('hidden');
+        }
+
+        successBox?.classList.add('hidden');
+
+        requestAnimationFrame(() => {
+            contactSection?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+    }
+
+    form?.addEventListener('submit', () => {
+        successBox?.classList.add('hidden');
+        errorBox?.classList.add('hidden');
+
+        if (errorBox) {
+            errorBox.textContent = defaultErrorMessage;
+        }
+    });
+</script>

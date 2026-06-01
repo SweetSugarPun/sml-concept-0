@@ -25,3 +25,8 @@ pnpm-debug.log*
 
 # vscode setting folder
 .vscode/
+
+/private/mail-config.php
+/public/vendor/
+/vendor/
+/composer.lock

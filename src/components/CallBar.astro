@@ -1,30 +1,19 @@
 ---
 import Icon from "heroicons-astro/Heroicon.astro";
 import { contact } from '../data/contact';
-
-let isScrolled = false;
-
-if (Astro.client) {
-    window.addEventListener('scroll', () => {
-        isScrolled = window.scrollY > 10;
-    });
-}
 ---
-<header class={`sticky top-0 z-40 border-b border-slate-800 bg-slate-900/90 backdrop-blur transition-shadow ${isScrolled ? 'shadow-md shadow-black/40' : ''}`}>
+
+<header
+        id="callbar"
+        class="sticky top-0 z-40 border-b border-slate-800 bg-slate-900 transition-shadow supports-backdrop"
+>
     <div class="mx-auto flex max-w-6xl items-center justify-between px-4 py-1.5 text-slate-200 sm:px-6 lg:px-8">
-        <!-- Info o firmie po lewej -->
-        <div class="space-y-0.5 text-xs sm:text-sm leading-snug">
+        <div class="space-y-0.5 text-xs leading-snug sm:text-sm">
             <p class="text-sm font-semibold sm:text-base">
                 {contact.name}
             </p>
-            <p class="font-medium text-slate-300">
-                NIP: {contact.nip}
-            </p>
-            <p class="font-medium text-slate-300">
-                REGON: {contact.regon}
-            </p>
         </div>
-        <!-- Przycisk telefoniczny -->
+
         <a
                 href={contact.phoneHref}
                 class="btn-callbar"
@@ -34,9 +23,26 @@ if (Astro.client) {
                     iconStyle="outline"
                     customClasses="mr-3 h-5 w-5"
             />
-            <span class="text-sm leading-none">
-        {contact.phone}
-      </span>
+            <span class="callbar-phone text-sm leading-none">
+                {contact.phone}
+            </span>
         </a>
     </div>
 </header>
+
+<script>
+    const callbar = document.getElementById('callbar');
+
+    const updateCallbarShadow = () => {
+        if (!callbar) return;
+
+        if (window.scrollY > 10) {
+            callbar.classList.add('shadow-md', 'shadow-black/40');
+        } else {
+            callbar.classList.remove('shadow-md', 'shadow-black/40');
+        }
+    };
+
+    updateCallbarShadow();
+    window.addEventListener('scroll', updateCallbarShadow, { passive: true });
+</script>

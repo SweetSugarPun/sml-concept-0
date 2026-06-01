@@ -1,10 +1,11 @@
 ---
 import {contact} from "../data/contact.ts";
+import { Picture } from "astro:assets";
+import heroLublin from "../images/stock-lublin-2.jpeg";
 ---
 
 <section class="min-h-[80vh] flex items-center pt-0 pb-16">
     <div class="mx-auto flex max-w-5xl flex-col items-center px-4 py-16 text-center gap-10">
-        <!-- Tekst + przyciski -->
         <div class="max-w-3xl space-y-6 hero-fade-in-up">
             <p class="section-label mx-auto text-xl">
                 SZYBKA, BEZPIECZNA SPRZEDAŻ
@@ -32,12 +33,16 @@ import {contact} from "../data/contact.ts";
 
         <!-- Zdjęcie pod hero -->
         <div class="mx-auto mt-10 max-w-5xl hero-fade-in-up-slow">
-            <div class="overflow-hidden rounded-3xl bg-slate-900/60 shadow-[0_22px_60px_rgba(0,0,0,0.85)]">
-                <img
-                        src="/images/stock-lublin-2.jpeg"
-                        alt="Lublin, panorama"
+            <div class="overflow-hidden rounded-3xl bg-slate-900 shadow-[0_22px_60px_rgba(0,0,0,0.85)]">
+                <Picture
+                        src={heroLublin}
+                        alt="Panorama Lublina"
+                        widths={[640, 960, 1280, 1600]}
+                        formats={["webp"]}
+                        fallbackFormat="jpeg"
+                        loading="eager"
+                        fetchpriority="high"
                         class="block h-full w-full object-cover"
-                        loading="lazy"
                 />
             </div>
         </div>
