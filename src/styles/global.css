@@ -24,25 +24,6 @@ html {
         @apply min-w-70 justify-center;
     }
 
-    /*.btn-callbar {*/
-    /*    @apply inline-flex items-center justify-center rounded-lg px-5 py-2.5 text-xs font-semibold tracking-[0.12em] transition*/
-    /*    border border-slate-200 bg-white text-slate-900*/
-    /*    hover:bg-[#d3a842] hover:border-[#d3a842] hover:text-white;*/
-    /*    max-width: 203px;*/
-    /*}*/
-
-    /*.btn-gold-main {*/
-    /*    @apply inline-flex items-center justify-center rounded-xl px-8 py-3 text-sm font-semibold tracking-[0.18em] transition*/
-    /*    border border-[#d3a842] bg-[#d3a842] text-slate-900 shadow-sm*/
-    /*    hover:bg-white hover:text-slate-900 hover:border-transparent;*/
-    /*}*/
-
-    /*.btn-outline {*/
-    /*    @apply inline-flex items-center justify-center rounded-xl px-8 py-3 text-sm font-semibold tracking-[0.18em] transition*/
-    /*    border border-slate-500 bg-transparent text-slate-100*/
-    /*    hover:border-[#d3a842] hover:text-[#d3a842];*/
-    /*}*/
-
     .btn-callbar {
         @apply inline-flex items-center justify-center rounded-lg px-5 py-2.5 text-xs font-semibold tracking-[0.12em]
         transition-all duration-150
@@ -51,6 +32,11 @@ html {
         active:bg-[#d3a842] active:border-[#d3a842] active:text-white active:scale-[0.98]
         focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d3a842] focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950;
         max-width: 203px;
+    }
+
+    .callbar-phone {
+        white-space: nowrap;
+        min-width: 0;
     }
 
     .btn-gold-main {
@@ -97,6 +83,18 @@ html {
         to {
             opacity: 1;
             transform: translateY(0);
+        }
+    }
+
+    .supports-backdrop {
+        background-color: rgb(15 23 42);
+    }
+
+    @supports ((-webkit-backdrop-filter: blur(8px)) or (backdrop-filter: blur(8px))) {
+        .supports-backdrop {
+            background-color: rgb(15 23 42 / 0.9);
+            -webkit-backdrop-filter: blur(8px);
+            backdrop-filter: blur(8px);
         }
     }
 }

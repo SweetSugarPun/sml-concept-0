@@ -1,73 +1,33 @@
+---
+import {faqItems} from "../data/site.ts";
+---
 <section class="border-t border-slate-200 bg-slate-50">
     <div class="mx-auto max-w-4xl px-4 py-16">
-        <p class="section-label text-xl">
-            Pytania i odpowiedzi
-        </p>
+        <p class="section-label text-xl">Pytania i odpowiedzi</p>
         <h2 class="mb-8 text-2xl font-bold text-slate-900 md:text-3xl">
             Najczęstsze pytania przy sprzedaży mieszkania
         </h2>
 
         <div class="space-y-4">
-            <details class="group card-light p-4">
-                <summary class="flex cursor-pointer items-center justify-between gap-4">
-          <span class="text-sm font-semibold text-slate-900">
-            Czy skupujecie mieszkania zadłużone lub z hipoteką?
-          </span>
-                    <span class="text-slate-400 transition-transform group-open:rotate-180">
-            ▾
-          </span>
-                </summary>
-                <p class="mt-3 text-sm text-slate-700">
-                    Tak, analizujemy również sprawy z długami, hipoteką czy komornikiem.
-                    Na podstawie dokumentów przedstawiamy realną ofertę z uwzględnieniem zadłużenia.
-                </p>
-            </details>
+            {faqItems.map((item: { question: unknown; answer: unknown; }) => (
+                    <details class="group card-light p-4">
+                        <summary class="flex list-none cursor-pointer items-center justify-between gap-4">
+                            <span class="text-sm font-semibold text-slate-900">
+                                {item.question}
+                            </span>
+                            <span
+                                    aria-hidden="true"
+                                    class="shrink-0 text-slate-400 transition-transform group-open:rotate-180"
+                            >
+                            ▾
+                            </span>
+                        </summary>
 
-            <details class="group card-light p-4">
-                <summary class="flex cursor-pointer items-center justify-between gap-4">
-          <span class="text-sm font-semibold text-slate-900">
-            Ile czasu zajmuje cały proces sprzedaży?
-          </span>
-                    <span class="text-slate-400 transition-transform group-open:rotate-180">
-            ▾
-          </span>
-                </summary>
-                <p class="mt-3 text-sm text-slate-700">
-                    W prostych przypadkach formalności można zamknąć nawet w ciągu kilku dni.
-                    Termin aktu notarialnego zależy też od dostępności notariusza i skomplikowania sprawy.
-                </p>
-            </details>
-
-            <details class="group card-light p-4">
-                <summary class="flex cursor-pointer items-center justify-between gap-4">
-          <span class="text-sm font-semibold text-slate-900">
-            Jakie dokumenty są potrzebne do wyceny?
-          </span>
-                    <span class="text-slate-400 transition-transform group-open:rotate-180">
-            ▾
-          </span>
-                </summary>
-                <p class="mt-3 text-sm text-slate-700">
-                    Najczęściej potrzebna jest księga wieczysta, podstawa nabycia mieszkania
-                    (np. akt notarialny, postanowienie o nabyciu spadku) oraz dowód osobisty właściciela.
-                    Przy zadłużeniu przydadzą się także pisma od wierzycieli.
-                </p>
-            </details>
-
-            <details class="group card-light p-4">
-                <summary class="flex cursor-pointer items-center justify-between gap-4">
-          <span class="text-sm font-semibold text-slate-900">
-            Czy muszę przygotowywać mieszkanie do sprzedaży?
-          </span>
-                    <span class="text-slate-400 transition-transform group-open:rotate-180">
-            ▾
-          </span>
-                </summary>
-                <p class="mt-3 text-sm text-slate-700">
-                    Nie wymagamy remontów ani homestagingu. Kupujemy mieszkania w stanie
-                    obecnym, również do generalnego remontu.
-                </p>
-            </details>
+                        <p class="mt-3 text-sm leading-6 text-slate-700">
+                            {item.answer}
+                        </p>
+                    </details>
+            ))}
         </div>
     </div>
 </section>
